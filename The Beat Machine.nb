@@ -1,0 +1,2188 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[    100708,       2179]
+NotebookOptionsPosition[    100099,       2153]
+NotebookOutlinePosition[    100471,       2169]
+CellTagsIndexPosition[    100428,       2166]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["The Beat Machine", "Title",
+ CellChangeTimes->{{3.477149407964557*^9, 3.477149410177557*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Initialization", "Section",
+ CellChangeTimes->{{3.477149311049557*^9, 3.477149313616557*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"BeatMachine", "[", "]"}], ":=", 
+  RowBox[{"DynamicModule", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"melodya", "=", "\"\<Accordion\>\""}], ",", 
+      RowBox[{"melodyb", "=", "\"\<Accordion\>\""}], ",", 
+      RowBox[{"melodyc", "=", "\"\<Accordion\>\""}], ",", 
+      RowBox[{"melodyd", "=", "\"\<Accordion\>\""}], ",", 
+      RowBox[{"melodye", "=", "\"\<Accordion\>\""}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"BPM", "=", "300"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"repeat", "=", "1"}], ",", "a", ",", "b", ",", "c", ",", "d", 
+      ",", "e", ",", "f", ",", "g", ",", "h", ",", "ff", ",", "fff", ",", 
+      "testsound", ",", "\[IndentingNewLine]", 
+      RowBox[{"sn", "=", "1"}], ",", 
+      RowBox[{"imp", "=", 
+       RowBox[{"{", "}"}]}], ",", 
+      RowBox[{"i", "=", "0"}], ",", "symbol2", ",", 
+      RowBox[{"horizontalscroll", "=", "0"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"MeasureSize", "=", "8"}], ",", 
+      RowBox[{"name", "=", "\"\<Untitled\>\""}], ",", "\[IndentingNewLine]", 
+      RowBox[{"ptlis", "=", 
+       RowBox[{"{", "}"}]}], ",", 
+      RowBox[{"help", "=", 
+       RowBox[{"-", "1"}]}], ",", 
+      RowBox[{"currentbeat", "=", 
+       RowBox[{"{", "}"}]}], ",", 
+      RowBox[{"totalptlist", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", "}"}], ",", 
+         RowBox[{"{", "}"}], ",", 
+         RowBox[{"{", "}"}], ",", 
+         RowBox[{"{", "}"}], ",", 
+         RowBox[{"{", "}"}]}], "}"}]}], ",", 
+      RowBox[{"beatstart", "=", 
+       RowBox[{"{", "}"}]}], ",", 
+      RowBox[{"verticalscroll", "=", "0"}], ",", 
+      RowBox[{"beatnumber", "=", "1"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"PercussionList", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "26"}], ",", 
+         RowBox[{"-", "26"}], ",", 
+         RowBox[{"-", "26"}], ",", 
+         RowBox[{"-", "26"}], ",", 
+         RowBox[{"-", "26"}], ",", 
+         RowBox[{"-", "26"}], ",", 
+         RowBox[{"-", "26"}], ",", 
+         RowBox[{"-", "26"}]}], "}"}]}], ",", "menu", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"r", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "26"}], "\[Rule]", "\"\<Nothing\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "25"}], "\[Rule]", "\"\<Bass Drum Acoustic\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "24"}], "\[Rule]", "\"\<Bass Drum\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "23"}], "\[Rule]", "\"\<Side Stick\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "22"}], "\[Rule]", "\"\<Snare Acoustic\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "21"}], "\[Rule]", "\"\<Hand Clap\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "20"}], "\[Rule]", "\"\<Snare Electric\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "19"}], "\[Rule]", "\"\<Tom Floor Low\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "18"}], "\[Rule]", "\"\<Closed Hi-Hat\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "17"}], "\[Rule]", "\"\<Tom Floor High\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "16"}], "\[Rule]", "\"\<Pedal Hi-Hat\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "15"}], "\[Rule]", "\"\<Low Tom\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "14"}], "\[Rule]", "\"\<Open Hi-Hat\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "13"}], "\[Rule]", "\"\<Low-Mid Tom\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "12"}], "\[Rule]", "\"\<Hi-Mid Tom\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "11"}], "\[Rule]", "\"\<Crash Cymbal 1\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "10"}], "\[Rule]", "\"\<High Tom\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "9"}], "\[Rule]", "\"\<Ride Cymbal 1\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "8"}], "\[Rule]", "\"\<Chinese Cymbal\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "7"}], "\[Rule]", "\"\<Ride Bell\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "6"}], "\[Rule]", "\"\<Tambourine\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "5"}], "\[Rule]", "\"\<Splash Cymbal\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "4"}], "\[Rule]", "\"\<Cowbell\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "3"}], "\[Rule]", "\"\<Crash Cymbal 2\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "2"}], "\[Rule]", "\"\<Vibraslap\>\""}], ",", 
+         RowBox[{
+          RowBox[{"-", "1"}], "\[Rule]", "\"\<Ride Cymbal 2\>\""}], ",", 
+         RowBox[{"0", "\[Rule]", "\"\<Hi Bongo\>\""}], ",", 
+         RowBox[{"1", "\[Rule]", "\"\<Low Bongo\>\""}], ",", 
+         RowBox[{"2", "\[Rule]", "\"\<Mute Hi Conga\>\""}], ",", 
+         RowBox[{"3", "\[Rule]", "\"\<Open Hi Conga\>\""}], ",", 
+         RowBox[{"4", "\[Rule]", "\"\<Low Conga\>\""}], ",", 
+         RowBox[{"5", "\[Rule]", "\"\<High Timbale\>\""}], ",", 
+         RowBox[{"6", "\[Rule]", "\"\<Low Timbale\>\""}], ",", 
+         RowBox[{"7", "\[Rule]", "\"\<High Agogo\>\""}], ",", 
+         RowBox[{"8", "\[Rule]", "\"\<Low Agogo\>\""}], ",", 
+         RowBox[{"9", "\[Rule]", "\"\<Cabasa\>\""}], ",", 
+         RowBox[{"10", "\[Rule]", "\"\<Maracas\>\""}], ",", 
+         RowBox[{"11", "\[Rule]", "\"\<Short Whistle\>\""}], ",", 
+         RowBox[{"12", "\[Rule]", "\"\<Long Whistle\>\""}], ",", 
+         RowBox[{"13", "\[Rule]", "\"\<Short Guiro\>\""}], ",", 
+         RowBox[{"14", "\[Rule]", "\"\<Long Guiro\>\""}], ",", 
+         RowBox[{"15", "\[Rule]", "\"\<Claves\>\""}], ",", 
+         RowBox[{"16", "\[Rule]", "\"\<Hi Wood Block\>\""}], ",", 
+         RowBox[{"17", "\[Rule]", "\"\<Low Wood Block\>\""}], ",", 
+         RowBox[{"18", "\[Rule]", "\"\<Mute Cuica\>\""}], ",", 
+         RowBox[{"19", "\[Rule]", "\"\<Open Cuica\>\""}], ",", 
+         RowBox[{"20", "\[Rule]", "\"\<Mute Triangle\>\""}], ",", 
+         RowBox[{"21", "\[Rule]", "\"\<Open Triangle\>\""}]}], "}"}]}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Melodylist", "=", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<Accordion\>\"", ",", "\"\<Agogo\>\"", ",", "\"\<AltoSax\>\"", 
+         ",", "\"\<Applause\>\"", ",", "\"\<Atmosphere\>\"", ",", 
+         "\"\<Bagpipe\>\"", ",", "\"\<Bandoneon\>\"", ",", "\"\<Banjo\>\"", 
+         ",", "\"\<BaritoneSax\>\"", ",", "\"\<Bass\>\"", ",", 
+         "\"\<BassAndLead\>\"", ",", "\"\<Bassoon\>\"", ",", "\"\<Bird\>\"", 
+         ",", "\"\<BlownBottle\>\"", ",", "\"\<Bowed\>\"", ",", 
+         "\"\<BrassSection\>\"", ",", "\"\<Breath\>\"", ",", 
+         "\"\<Brightness\>\"", ",", "\"\<BrightPiano\>\"", ",", 
+         "\"\<Calliope\>\"", ",", "\"\<Celesta\>\"", ",", "\"\<Cello\>\"", 
+         ",", "\"\<Charang\>\"", ",", "\"\<Chiff\>\"", ",", "\"\<Choir\>\"", 
+         ",", "\"\<Clarinet\>\"", ",", "\"\<Clavi\>\"", ",", 
+         "\"\<Contrabass\>\"", ",", "\"\<Crystal\>\"", ",", 
+         "\"\<DrawbarOrgan\>\"", ",", "\"\<Dulcimer\>\"", ",", 
+         "\"\<Echoes\>\"", ",", "\"\<ElectricBass\>\"", ",", 
+         "\"\<ElectricGrandPiano\>\"", ",", "\"\<ElectricGuitar\>\"", ",", 
+         "\"\<ElectricPiano\>\"", ",", "\"\<ElectricPiano2\>\"", ",", 
+         "\"\<EnglishHorn\>\"", ",", "\"\<Fiddle\>\"", ",", "\"\<Fifths\>\"", 
+         ",", "\"\<Flute\>\"", ",", "\"\<FrenchHorn\>\"", ",", 
+         "\"\<FretlessBass\>\"", ",", "\"\<FretNoise\>\"", ",", 
+         "\"\<Glockenspiel\>\"", ",", "\"\<Goblins\>\"", ",", 
+         "\"\<Guitar\>\"", ",", "\"\<GuitarDistorted\>\"", ",", 
+         "\"\<GuitarHarmonics\>\"", ",", "\"\<GuitarMuted\>\"", ",", 
+         "\"\<GuitarOverdriven\>\"", ",", "\"\<Gunshot\>\"", ",", 
+         "\"\<Halo\>\"", ",", "\"\<Harmonica\>\"", ",", "\"\<Harp\>\"", ",", 
+         "\"\<Harpsichord\>\"", ",", "\"\<Helicopter\>\"", ",", 
+         "\"\<HonkyTonkPiano\>\"", ",", "\"\<JazzGuitar\>\"", ",", 
+         "\"\<Kalimba\>\"", ",", "\"\<Koto\>\"", ",", "\"\<Marimba\>\"", ",", 
+         "\"\<MelodicTom\>\"", ",", "\"\<Metallic\>\"", ",", 
+         "\"\<MusicBox\>\"", ",", "\"\<MutedTrumpet\>\"", ",", 
+         "\"\<NewAge\>\"", ",", "\"\<Oboe\>\"", ",", "\"\<Ocarina\>\"", ",", 
+         "\"\<OrchestraHit\>\"", ",", "\"\<Organ\>\"", ",", 
+         "\"\<PanFlute\>\"", ",", "\"\<PercussiveOrgan\>\"", ",", 
+         "\"\<Piano\>\"", ",", "\"\<Piccolo\>\"", ",", "\"\<PickedBass\>\"", 
+         ",", "\"\<PizzicatoStrings\>\"", ",", "\"\<Polysynth\>\"", ",", 
+         "\"\<Rain\>\"", ",", "\"\<Recorder\>\"", ",", "\"\<ReedOrgan\>\"", 
+         ",", "\"\<ReverseCymbal\>\"", ",", "\"\<RockOrgan\>\"", ",", 
+         "\"\<Sawtooth\>\"", ",", "\"\<SciFi\>\"", ",", "\"\<Seashore\>\"", 
+         ",", "\"\<Shakuhachi\>\"", ",", "\"\<Shamisen\>\"", ",", 
+         "\"\<Shanai\>\"", ",", "\"\<Sitar\>\"", ",", "\"\<SlapBass\>\"", 
+         ",", "\"\<SlapBass2\>\"", ",", "\"\<SopranoSax\>\"", ",", 
+         "\"\<Soundtrack\>\"", ",", "\"\<Square\>\"", ",", 
+         "\"\<Steeldrums\>\"", ",", "\"\<SteelGuitar\>\"", ",", 
+         "\"\<Strings\>\"", ",", "\"\<Strings2\>\"", ",", "\"\<Sweep\>\"", 
+         ",", "\"\<SynthBass\>\"", ",", "\"\<SynthBass2\>\"", ",", 
+         "\"\<SynthBrass\>\"", ",", "\"\<SynthBrass2\>\"", ",", 
+         "\"\<SynthDrum\>\"", ",", "\"\<SynthStrings\>\"", ",", 
+         "\"\<SynthStrings2\>\"", ",", "\"\<SynthVoice\>\"", ",", 
+         "\"\<Taiko\>\"", ",", "\"\<Telephone\>\"", ",", "\"\<TenorSax\>\"", 
+         ",", "\"\<Timpani\>\"", ",", "\"\<Tinklebell\>\"", ",", 
+         "\"\<TremoloStrings\>\"", ",", "\"\<Trombone\>\"", ",", 
+         "\"\<Trumpet\>\"", ",", "\"\<Tuba\>\"", ",", "\"\<TubularBells\>\"", 
+         ",", "\"\<Vibraphone\>\"", ",", "\"\<Viola\>\"", ",", 
+         "\"\<Violin\>\"", ",", "\"\<Voice\>\"", ",", "\"\<VoiceAahs\>\"", 
+         ",", "\"\<VoiceOohs\>\"", ",", "\"\<Warm\>\"", ",", 
+         "\"\<Whistle\>\"", ",", "\"\<Woodblock\>\"", ",", 
+         "\"\<Xylophone\>\""}], "}"}]}]}], "\[IndentingNewLine]", "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Clear", "[", 
+      RowBox[{"u", ",", "x"}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"symbol2", "[", "u_", "]"}], ":=", 
+      RowBox[{"Translate", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"RGBColor", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "0", ",", "0"}], "}"}], "]"}], ",", 
+          RowBox[{"Opacity", "[", ".3", "]"}], ",", 
+          RowBox[{"Rectangle", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", ".5"}], ",", 
+              RowBox[{"-", ".5"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{".5", ",", ".5"}], "}"}]}], "]"}]}], "}"}], ",", 
+        RowBox[{"u", "+", ".5"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"menu", "[", "x_", "]"}], ":=", 
+      RowBox[{"ActionMenu", "[", 
+       RowBox[{
+        RowBox[{"Dynamic", "[", 
+         RowBox[{"Style", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"PercussionList", "[", 
+             RowBox[{"[", "x", "]"}], "]"}], "/.", "r"}], ",", 
+           RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
+           RowBox[{"TextAlignment", "\[Rule]", "Right"}]}], "]"}], "]"}], ",", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "\[RuleDelayed]", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"PercussionList", "=", 
+                 RowBox[{"ReplacePart", "[", 
+                  RowBox[{"PercussionList", ",", 
+                   RowBox[{"x", "->", 
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}]}], "]"}]}], ";", 
+                RowBox[{"EmitSound", "[", 
+                 RowBox[{"Sound", "[", 
+                  RowBox[{"SoundNote", "[", 
+                   RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], ",", "0", ",", 
+                    "\"\<Percussion\>\""}], "]"}], "]"}], "]"}]}], ")"}]}], 
+             "}"}], "&"}], ",", 
+           RowBox[{"SortBy", "[", 
+            RowBox[{
+             RowBox[{"Partition", "[", 
+              RowBox[{
+               RowBox[{"Riffle", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Range", "[", 
+                   RowBox[{
+                    RowBox[{"-", "26"}], ",", "21"}], "]"}], "/.", "r"}], ",", 
+                 RowBox[{"Range", "[", 
+                  RowBox[{
+                   RowBox[{"-", "26"}], ",", "21"}], "]"}]}], "]"}], ",", 
+               "2"}], "]"}], ",", "First"}], "]"}]}], "]"}], "]"}], ",", 
+        RowBox[{"Appearance", "\[Rule]", "Button"}], ",", 
+        RowBox[{"MenuAppearance", "\[Rule]", "\"\<Dropdown\>\""}], ",", 
+        RowBox[{"Alignment", "->", "Left"}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"100", ",", "39"}], "}"}]}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ff", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x_", ",", "y_"}], "}"}], ",", "bpm_"}], "]"}], ":=", 
+      RowBox[{"SoundNote", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"IntegerPart", "[", "y", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"x", "-", "1"}], ")"}], "/", 
+           RowBox[{"(", 
+            RowBox[{"bpm", "/", "60"}], ")"}]}], ",", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"x", "-", "1"}], ")"}], "/", 
+           RowBox[{"(", 
+            RowBox[{"bpm", "/", "60"}], ")"}]}]}], "}"}], ",", 
+        "\"\<Percussion\>\""}], "]"}]}], ";", " ", 
+     RowBox[{
+      RowBox[{"fff", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], ",", "bpm_", ",", 
+        "melody_"}], "]"}], ":=", 
+      RowBox[{"SoundNote", "[", 
+       RowBox[{"y", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"x", "-", "1"}], ")"}], "/", 
+           RowBox[{"(", 
+            RowBox[{"bpm", "/", "60"}], ")"}]}], ",", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"x", "-", "1"}], ")"}], "+", "z"}], ")"}], "/", 
+           RowBox[{"(", 
+            RowBox[{"bpm", "/", "60"}], ")"}]}]}], "}"}], ",", "melody", ",", 
+        RowBox[{"SoundVolume", "\[Rule]", ".5"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Framed", "[", 
+      RowBox[{
+       RowBox[{"Row", "[", 
+        RowBox[{
+         RowBox[{"{", "\[IndentingNewLine]", 
+          RowBox[{"Column", "[", 
+           RowBox[{
+            RowBox[{"{", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"Column", "[", 
+               RowBox[{"{", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"Row", "[", 
+                  RowBox[{"{", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"Column", "[", 
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"Grid", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<Title:\>\"", ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"InputField", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "name", "]"}], ",", "String", ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "200"}]}], "]"}], ",", 
+                    "Bold", ",", 
+                    RowBox[{"FontSize", "\[Rule]", "16"}]}], "]"}]}], "}"}], 
+                    "}"}], ",", 
+                    RowBox[{"Alignment", "\[Rule]", "Center"}], ",", 
+                    RowBox[{"ItemSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"5", ",", "20"}], "}"}], "}"}]}]}], "]"}], "]"}], 
+                    ",", "\[IndentingNewLine]", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"Grid", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<BPM \>\"", ",", 
+                    RowBox[{"Slider", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "BPM", "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"60", ",", "600", ",", "4"}], "}"}]}], "]"}], ",", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"BPM", "/", "4"}], "]"}], "]"}]}], "}"}], "}"}], 
+                    ",", 
+                    RowBox[{"ItemSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"5", ",", "20", ",", "2"}], "}"}], "}"}]}]}], 
+                    "]"}], "]"}], ",", "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"Grid", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<Repeat\>\"", ",", 
+                    RowBox[{"Slider", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "repeat", "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "8", ",", "1"}], "}"}]}], "]"}], ",", 
+                    RowBox[{"Dynamic", "[", "repeat", "]"}]}], "}"}], "}"}], 
+                    ",", 
+                    RowBox[{"ItemSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"5", ",", "20", ",", "2"}], "}"}], "}"}]}]}], 
+                    "]"}], "]"}]}], "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", "\[IndentingNewLine]", "}"}], 
+                    "]"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                    RowBox[{"(*", 
+                    RowBox[{
+                    RowBox[{"SetterBar", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "i", "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"5", "\[Rule]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<Inst5 \>\"", ",", 
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Hue", "[", ".8", "]"}], ",", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "1"}], "}"}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], 
+                    "]"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"4", "\[Rule]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<Inst4 \>\"", ",", 
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Hue", "[", ".6", "]"}], ",", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "1"}], "}"}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], 
+                    "]"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"3", "\[Rule]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<Inst3 \>\"", ",", 
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Hue", "[", ".4", "]"}], ",", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "1"}], "}"}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], 
+                    "]"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"2", "\[Rule]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<Inst2 \>\"", ",", 
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Hue", "[", ".2", "]"}], ",", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "1"}], "}"}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], 
+                    "]"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"1", "\[Rule]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<Inst1 \>\"", ",", 
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Hue", "[", "0", "]"}], ",", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "1"}], "}"}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], 
+                    "]"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"0", "\[Rule]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<Drum  \>\"", ",", 
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{
+                    RowBox[{"symbol2", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], "]"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], 
+                    "]"}]}]}], "\[IndentingNewLine]", "}"}], ",", 
+                    RowBox[{"Appearance", "\[Rule]", "\"\<Vertical\>\""}], 
+                    ",", 
+                    RowBox[{"Background", "\[Rule]", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{".9", ",", ".9", ",", ".9"}], "]"}]}]}], "]"}], 
+                    ","}], "*)"}], "\[IndentingNewLine]", 
+                    RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Setter", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "i", "]"}], ",", "5", ",", 
+                    "\[IndentingNewLine]", "\"\<Instrument 5\>\"", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"PopupMenu", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "melodye", "]"}], ",", 
+                    "Melodylist", ",", 
+                    RowBox[{"Alignment", "\[Rule]", "Center"}], ",", 
+                    RowBox[{
+                    "Appearance", "\[Rule]", "\"\<FramedPalette\>\""}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "}"}], ",", 
+                    RowBox[{"Background", "\[Rule]", 
+                    RowBox[{"Hue", "[", ".8", "]"}]}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Setter", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "i", "]"}], ",", "4", ",", 
+                    "\[IndentingNewLine]", "\"\<Instrument 4\>\"", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"PopupMenu", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "melodyd", "]"}], ",", 
+                    "Melodylist", ",", 
+                    RowBox[{"Alignment", "\[Rule]", "Center"}], ",", 
+                    RowBox[{
+                    "Appearance", "\[Rule]", "\"\<FramedPalette\>\""}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "}"}], ",", 
+                    RowBox[{"Background", "\[Rule]", 
+                    RowBox[{"Hue", "[", ".6", "]"}]}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Setter", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "i", "]"}], ",", "3", ",", 
+                    "\[IndentingNewLine]", "\"\<Instrument 3\>\"", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"PopupMenu", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "melodyc", "]"}], ",", 
+                    "Melodylist", ",", 
+                    RowBox[{"Alignment", "\[Rule]", "Center"}], ",", 
+                    RowBox[{
+                    "Appearance", "\[Rule]", "\"\<FramedPalette\>\""}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "}"}], ",", 
+                    RowBox[{"Background", "\[Rule]", 
+                    RowBox[{"Hue", "[", ".4", "]"}]}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Setter", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "i", "]"}], ",", "2", ",", 
+                    "\[IndentingNewLine]", "\"\<Instrument 2\>\"", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"PopupMenu", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "melodyb", "]"}], ",", 
+                    "Melodylist", ",", 
+                    RowBox[{"Alignment", "\[Rule]", "Center"}], ",", 
+                    RowBox[{
+                    "Appearance", "\[Rule]", "\"\<FramedPalette\>\""}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "}"}], ",", 
+                    RowBox[{"Background", "\[Rule]", 
+                    RowBox[{"Hue", "[", ".2", "]"}]}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Setter", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "i", "]"}], ",", "1", ",", 
+                    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                    "\"\<Instrument 1\>\"", ",", "\[IndentingNewLine]", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}], ",", 
+                    RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"PopupMenu", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "melodya", "]"}], ",", 
+                    "Melodylist", ",", 
+                    RowBox[{"Alignment", "\[Rule]", "Center"}], ",", 
+                    RowBox[{
+                    "Appearance", "\[Rule]", "\"\<FramedPalette\>\""}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "}"}], ",", 
+                    RowBox[{"Background", "\[Rule]", 
+                    RowBox[{"Hue", "[", ".0", "]"}]}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{"Setter", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "i", "]"}], ",", "0", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{
+                    RowBox[{"symbol2", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], "]"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "8"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", "\"\< Percussion \>\"", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{
+                    RowBox[{"symbol2", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], "]"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "8"}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "}"}], "]"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"200", ",", "20"}], "}"}]}], ",", 
+                    RowBox[{"Alignment", "\[Rule]", "Center"}]}], "]"}], 
+                    "\[IndentingNewLine]", "}"}], "]"}]}], 
+                    "\[IndentingNewLine]", "}"}], ",", "Center", ",", "0", 
+                    ",", 
+                    RowBox[{"Background", "\[Rule]", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{".9", ",", ".9", ",", ".9"}], "]"}]}]}], "]"}], 
+                    ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                    RowBox[{"(*", 
+                    RowBox[{
+                    RowBox[{"Column", "[", 
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"PopupMenu", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "melodye", "]"}], ",", 
+                    "Melodylist", ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"PopupMenu", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "melodyd", "]"}], ",", 
+                    "Melodylist", ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"PopupMenu", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "melodyc", "]"}], ",", 
+                    "Melodylist", ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"PopupMenu", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "melodyb", "]"}], ",", 
+                    "Melodylist", ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"PopupMenu", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "melodya", "]"}], ",", 
+                    "Melodylist", ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"100", ",", "18"}], "}"}]}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "}"}], "]"}], ","}], "*)"}], 
+                    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                    RowBox[{"Column", "[", 
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"InputField", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "imp", "]"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"200", ",", "20"}], "}"}]}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{"\"\<Import\>\"", ",", "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"MatchQ", "[", 
+                    RowBox[{"imp", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    "_String", ",", "_String", ",", "_String", ",", "_String",
+                     ",", "_String"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "_Integer", ",", "_Integer", ",", "_Integer", ",", 
+                    "_Integer", ",", "_Integer", ",", "_Integer", ",", 
+                    "_Integer", ",", "_Integer"}], "}"}], ",", "_Integer", 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"_Integer", ",", "_Integer"}], "}"}], "..."}], 
+                    "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"_Integer", ",", "_Integer", ",", "_Integer"}], 
+                    "}"}], "..."}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"_Integer", ",", "_Integer", ",", "_Integer"}], 
+                    "}"}], "..."}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"_Integer", ",", "_Integer", ",", "_Integer"}], 
+                    "}"}], "..."}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"_Integer", ",", "_Integer", ",", "_Integer"}], 
+                    "}"}], "..."}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"_Integer", ",", "_Integer", ",", "_Integer"}], 
+                    "}"}], "..."}], "}"}]}], "}"}], ",", "_Integer", ",", 
+                    "___String"}], "}"}]}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"melodya", "=", 
+                    RowBox[{"imp", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";", 
+                    RowBox[{"melodyb", "=", 
+                    RowBox[{"imp", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "2"}], "]"}], "]"}]}], ";", 
+                    RowBox[{"melodyc", "=", 
+                    RowBox[{"imp", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "3"}], "]"}], "]"}]}], ";", 
+                    RowBox[{"melodyd", "=", 
+                    RowBox[{"imp", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "4"}], "]"}], "]"}]}], ";", 
+                    RowBox[{"melodye", "=", 
+                    RowBox[{"imp", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "5"}], "]"}], "]"}]}], 
+                    "\[IndentingNewLine]", ";", 
+                    RowBox[{"PercussionList", "=", 
+                    RowBox[{"imp", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], ";", 
+                    RowBox[{"BPM", "=", 
+                    RowBox[{"imp", "[", 
+                    RowBox[{"[", "3", "]"}], "]"}]}], ";", 
+                    RowBox[{"ptlis", "=", 
+                    RowBox[{"imp", "[", 
+                    RowBox[{"[", "4", "]"}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"totalptlist", "=", 
+                    RowBox[{"imp", "[", 
+                    RowBox[{"[", "5", "]"}], "]"}]}], ";", 
+                    RowBox[{"MeasureSize", "=", 
+                    RowBox[{"imp", "[", 
+                    RowBox[{"[", "6", "]"}], "]"}]}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Length", "[", "imp", "]"}], "\[GreaterEqual]", 
+                    "7"}], ",", 
+                    RowBox[{"name", "=", 
+                    RowBox[{"imp", "[", 
+                    RowBox[{"[", "7", "]"}], "]"}]}]}], "]"}]}], ",", 
+                    RowBox[{"imp", "=", "\"\<Code Corrupted (;-;)\>\""}]}], 
+                    "]"}], "\[IndentingNewLine]", ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "200"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                    RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{"\"\<Export\>\"", ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"testsound", "=", 
+                    RowBox[{"Sound", "[", 
+                    RowBox[{
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"ff", "[", 
+                    RowBox[{"#", ",", "BPM"}], "]"}], "&"}], ",", 
+                    RowBox[{"Append", "[", 
+                    RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"ptlis", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"x", ",", "1"}], "]"}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"PercussionList", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"9", "-", 
+                    RowBox[{"IntegerPart", "[", 
+                    RowBox[{"ptlis", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"x", ",", "2"}], "]"}], "]"}], "]"}]}], "]"}], 
+                    "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "1", ",", 
+                    RowBox[{"Length", "[", "ptlis", "]"}]}], "}"}]}], "]"}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"4", "MeasureSize"}], "+", "1"}], ",", 
+                    RowBox[{"-", "26"}]}], "}"}]}], "]"}]}], "]"}], 
+                    "\[IndentingNewLine]", "~", "Join", "~", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"fff", "[", 
+                    RowBox[{"#", ",", "BPM", ",", "melodya"}], "]"}], "&"}], 
+                    ",", 
+                    RowBox[{"totalptlist", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], "]"}], 
+                    "\[IndentingNewLine]", "~", "Join", "~", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"fff", "[", 
+                    RowBox[{"#", ",", "BPM", ",", "melodyb"}], "]"}], "&"}], 
+                    ",", 
+                    RowBox[{"totalptlist", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "]"}], 
+                    "\[IndentingNewLine]", "~", "Join", "~", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"fff", "[", 
+                    RowBox[{"#", ",", "BPM", ",", "melodyc"}], "]"}], "&"}], 
+                    ",", 
+                    RowBox[{"totalptlist", "[", 
+                    RowBox[{"[", "3", "]"}], "]"}]}], "]"}], 
+                    "\[IndentingNewLine]", "~", "Join", "~", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"fff", "[", 
+                    RowBox[{"#", ",", "BPM", ",", "melodyd"}], "]"}], "&"}], 
+                    ",", 
+                    RowBox[{"totalptlist", "[", 
+                    RowBox[{"[", "4", "]"}], "]"}]}], "]"}], 
+                    "\[IndentingNewLine]", "~", "Join", "~", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"fff", "[", 
+                    RowBox[{"#", ",", "BPM", ",", "melodye"}], "]"}], "&"}], 
+                    ",", 
+                    RowBox[{"totalptlist", "[", 
+                    RowBox[{"[", "5", "]"}], "]"}]}], "]"}]}], "]"}]}], ";", 
+                    RowBox[{"CreatePalette", "[", 
+                    RowBox[{
+                    RowBox[{"DynamicModule", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"testsound2", "=", "testsound"}], "}"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Column", "[", 
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"PasteButton", "[", 
+                    RowBox[{"\"\<Paste Beat\>\"", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    "melodya", ",", "melodyb", ",", "melodyc", ",", "melodyd",
+                     ",", "melodye"}], "}"}], ",", "\[IndentingNewLine]", 
+                    "PercussionList", ",", "BPM", ",", "ptlis", ",", 
+                    "\[IndentingNewLine]", "totalptlist", ",", "MeasureSize", 
+                    ",", "name"}], "}"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"80", ",", "30"}], "}"}]}], ",", 
+                    RowBox[{"Appearance", "\[Rule]", "\"\<Button\>\""}]}], 
+                    "]"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{"\"\<Save\>\"", ",", 
+                    RowBox[{"NotebookSave", "[", "]"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"60", ",", "30"}], "}"}]}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{"\"\<Close\>\"", ",", 
+                    RowBox[{"NotebookClose", "[", "]"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"60", ",", "30"}], "}"}]}]}], "]"}]}], "}"}], 
+                    "]"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{"\"\<Play Sound\>\"", ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"EmitSound", "[", "#", "]"}], "&"}], "[", 
+                    "testsound2", "]"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"200", ",", "30"}], "}"}]}]}], "]"}]}], "}"}], 
+                    "]"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"OpenerView", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<Show Beat Coding\>\"", ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    "melodya", ",", "melodyb", ",", "melodyc", ",", "melodyd",
+                     ",", "melodye"}], "}"}], ",", "\[IndentingNewLine]", 
+                    "PercussionList", ",", "BPM", ",", "ptlis", ",", 
+                    "\[IndentingNewLine]", "totalptlist", ",", "MeasureSize", 
+                    ",", "name"}], "}"}], ",", 
+                    RowBox[{"FontSize", "\[Rule]", "10"}]}], "]"}]}], "}"}], 
+                    "]"}]}], "}"}], "\[IndentingNewLine]", ",", "Left", ",", 
+                    "2", ",", 
+                    RowBox[{"Dividers", "\[Rule]", "Center"}], ",", 
+                    RowBox[{"ItemSize", "\[Rule]", "20"}]}], 
+                    "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}]}], 
+                    "]"}], "\[IndentingNewLine]", ",", 
+                    RowBox[{"WindowSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"200", ",", "Fit"}], "}"}]}], ",", 
+                    RowBox[{"Background", "\[Rule]", "White"}], ",", 
+                    RowBox[{"WindowTitle", "\[Rule]", "name"}]}], "]"}]}], 
+                    ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "200"}]}], "]"}], 
+                    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+                    "}"}], "]"}]}], "\[IndentingNewLine]", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"(*", 
+                    RowBox[{",", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{"\"\<?\>\"", ",", 
+                    RowBox[{"help", "=", 
+                    RowBox[{"-", "help"}]}]}], "]"}]}], "*)"}], 
+                   "\[IndentingNewLine]", "\[IndentingNewLine]", "}"}], "]"}],
+                  ",", "\[IndentingNewLine]", 
+                 RowBox[{"Row", "[", 
+                  RowBox[{"{", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"Apply", "[", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"help", "\[Equal]", "1"}], ",", 
+                    RowBox[{
+                    RowBox[{"Tooltip", "[", 
+                    RowBox[{
+                    "#", ",", 
+                    "\"\<Stops the beat that is currently playing\>\""}], 
+                    "]"}], "&"}], ",", 
+                    RowBox[{"#", "&"}]}], "]"}], ",", 
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{"Button", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Stop\>\"", ",", "Bold", ",", 
+                    RowBox[{"FontSize", "\[Rule]", "20"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"EmitSound", "[", 
+                    RowBox[{"Sound", "[", 
+                    RowBox[{
+                    RowBox[{"SoundNote", "[", 
+                    RowBox[{"\"\<C\>\"", ",", "1"}], "]"}], ",", 
+                    RowBox[{"SoundVolume", "\[Rule]", "0"}]}], "]"}], "]"}], 
+                    ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"150", ",", "40"}], "}"}]}]}], 
+                    "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
+                    "}"}]}], "]"}], "\[IndentingNewLine]", "]"}], ",", 
+                    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                    RowBox[{"Button", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Play\>\"", ",", "Bold", ",", 
+                    RowBox[{"FontSize", "\[Rule]", "20"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"BPM2", "=", "BPM"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"ptlis2", "=", 
+                    RowBox[{"Append", "[", 
+                    RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"ptlis", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"x", ",", "1"}], "]"}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"PercussionList", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"9", "-", 
+                    RowBox[{"IntegerPart", "[", 
+                    RowBox[{"ptlis", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"x", ",", "2"}], "]"}], "]"}], "]"}]}], "]"}], 
+                    "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "1", ",", 
+                    RowBox[{"Length", "[", "ptlis", "]"}]}], "}"}]}], "]"}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"4", "MeasureSize"}], "+", "1"}], ",", 
+                    RowBox[{"-", "26"}]}], "}"}]}], "]"}]}], ";", " ", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"totalptlist2", "=", "totalptlist"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"repeat2", "=", "repeat"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(*", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"ff", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+                    RowBox[{"SoundNote", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"IntegerPart", "[", "y", "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "-", "1"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM2", "/", "60"}], ")"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "-", "1"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM2", "/", "60"}], ")"}]}]}], "}"}], ",", 
+                    "\"\<Percussion\>\""}], "]"}]}], ";", " ", 
+                    RowBox[{
+                    RowBox[{"fff1", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], "]"}], ":=", 
+                    RowBox[{"SoundNote", "[", 
+                    RowBox[{"y", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "-", "1"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM2", "/", "60"}], ")"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "-", "1"}], ")"}], "+", "z"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM2", "/", "60"}], ")"}]}]}], "}"}], ",", 
+                    "melodya", ",", 
+                    RowBox[{"SoundVolume", "\[Rule]", ".5"}]}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"fff2", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], "]"}], ":=", 
+                    RowBox[{"SoundNote", "[", 
+                    RowBox[{"y", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "-", "1"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM2", "/", "60"}], ")"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "-", "1"}], ")"}], "+", "z"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM2", "/", "60"}], ")"}]}]}], "}"}], ",", 
+                    "melodyb", ",", 
+                    RowBox[{"SoundVolume", "\[Rule]", ".5"}]}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"fff3", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], "]"}], ":=", 
+                    RowBox[{"SoundNote", "[", 
+                    RowBox[{"y", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "-", "1"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM2", "/", "60"}], ")"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "-", "1"}], ")"}], "+", "z"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM2", "/", "60"}], ")"}]}]}], "}"}], ",", 
+                    "melodyc", ",", 
+                    RowBox[{"SoundVolume", "\[Rule]", ".5"}]}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"fff4", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], "]"}], ":=", 
+                    RowBox[{"SoundNote", "[", 
+                    RowBox[{"y", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "-", "1"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM2", "/", "60"}], ")"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "-", "1"}], ")"}], "+", "z"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM2", "/", "60"}], ")"}]}]}], "}"}], ",", 
+                    "melodyd", ",", 
+                    RowBox[{"SoundVolume", "\[Rule]", ".5"}]}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"fff5", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], "]"}], ":=", 
+                    RowBox[{"SoundNote", "[", 
+                    RowBox[{"y", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "-", "1"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM2", "/", "60"}], ")"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "-", "1"}], ")"}], "+", "z"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM2", "/", "60"}], ")"}]}]}], "}"}], ",", 
+                    "melodye", ",", 
+                    RowBox[{"SoundVolume", "\[Rule]", ".5"}]}], "]"}]}], 
+                    ";"}], "*)"}], "\[IndentingNewLine]", 
+                    RowBox[{"EmitSound", "[", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"Sound", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"ff", "[", 
+                    RowBox[{"#", ",", "BPM2"}], "]"}], "&"}], ",", "ptlis2"}],
+                     "]"}], "\[IndentingNewLine]", "~", "Join", "~", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"fff", "[", 
+                    RowBox[{"#", ",", "BPM2", ",", "melodya"}], "]"}], "&"}], 
+                    ",", 
+                    RowBox[{"totalptlist2", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], "]"}], 
+                    "\[IndentingNewLine]", "~", "Join", "~", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"fff", "[", 
+                    RowBox[{"#", ",", "BPM2", ",", "melodyb"}], "]"}], "&"}], 
+                    ",", 
+                    RowBox[{"totalptlist2", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "]"}], 
+                    "\[IndentingNewLine]", "~", "Join", "~", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"fff", "[", 
+                    RowBox[{"#", ",", "BPM2", ",", "melodyc"}], "]"}], "&"}], 
+                    ",", 
+                    RowBox[{"totalptlist2", "[", 
+                    RowBox[{"[", "3", "]"}], "]"}]}], "]"}], 
+                    "\[IndentingNewLine]", "~", "Join", "~", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"fff", "[", 
+                    RowBox[{"#", ",", "BPM2", ",", "melodyd"}], "]"}], "&"}], 
+                    ",", 
+                    RowBox[{"totalptlist2", "[", 
+                    RowBox[{"[", "4", "]"}], "]"}]}], "]"}], 
+                    "\[IndentingNewLine]", "~", "Join", "~", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"fff", "[", 
+                    RowBox[{"#", ",", "BPM2", ",", "melodye"}], "]"}], "&"}], 
+                    ",", 
+                    RowBox[{"totalptlist2", "[", 
+                    RowBox[{"[", "5", "]"}], "]"}]}], "]"}]}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "1", ",", "repeat2"}], "}"}]}], "]"}], 
+                    "]"}], ";"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"500", ",", "40"}], "}"}]}]}], 
+                    "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"Apply", "[", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"help", "\[Equal]", "1"}], ",", 
+                    RowBox[{
+                    RowBox[{"Tooltip", "[", 
+                    RowBox[{
+                    "#", ",", "\"\<Clears all beats and settings.\>\""}], 
+                    "]"}], "&"}], ",", 
+                    RowBox[{"#", "&"}]}], "]"}], ",", 
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{"Button", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<Clear All\>\"", ",", "Bold", ",", 
+                    RowBox[{"FontSize", "\[Rule]", "20"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"totalptlist", "=", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", "}"}], ",", 
+                    RowBox[{"{", "}"}], ",", 
+                    RowBox[{"{", "}"}], ",", 
+                    RowBox[{"{", "}"}], ",", 
+                    RowBox[{"{", "}"}]}], "}"}]}], ";", 
+                    RowBox[{"melodya", "=", "\"\<Accordion\>\""}], ";", 
+                    RowBox[{"melodyb", "=", "\"\<Accordion\>\""}], ";", 
+                    RowBox[{"melodyc", "=", "\"\<Accordion\>\""}], ";", 
+                    RowBox[{"melodyd", "=", "\"\<Accordion\>\""}], ";", 
+                    RowBox[{"melodye", "=", "\"\<Accordion\>\""}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"PercussionList", "=", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "26"}], ",", 
+                    RowBox[{"-", "26"}], ",", 
+                    RowBox[{"-", "26"}], ",", 
+                    RowBox[{"-", "26"}], ",", 
+                    RowBox[{"-", "26"}], ",", 
+                    RowBox[{"-", "26"}], ",", 
+                    RowBox[{"-", "26"}], ",", 
+                    RowBox[{"-", "26"}]}], "}"}]}], ";", 
+                    RowBox[{"BPM", "=", "300"}], ";", 
+                    RowBox[{"ptlis", "=", 
+                    RowBox[{"{", "}"}]}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"150", ",", "40"}], "}"}]}], ",", 
+                    RowBox[{"Background", "\[Rule]", "Red"}]}], 
+                    "\[IndentingNewLine]", "]"}], "}"}]}], "]"}], "]"}]}], 
+                   "\[IndentingNewLine]", "}"}], "]"}]}], 
+                "\[IndentingNewLine]", "}"}], "]"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
+               RowBox[{"Grid", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"{", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<  Measure # \>\"", ",", 
+                    RowBox[{"Floor", "[", 
+                    RowBox[{
+                    RowBox[{"horizontalscroll", "/", "4"}], "+", "1"}], "]"}],
+                     ",", "\"\</\>\"", ",", "MeasureSize"}], "}"}], "]"}], 
+                    "]"}], ",", 
+                    RowBox[{"Slider", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "horizontalscroll", "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", 
+                    RowBox[{
+                    RowBox[{"4", "MeasureSize"}], "-", "16"}], ",", "1"}], 
+                    "}"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "600"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Button", "[", 
+                    RowBox[{
+                    RowBox[{"2", "^", 
+                    RowBox[{"(", 
+                    RowBox[{"#", "+", "1"}], ")"}]}], ",", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"MeasureSize", "=", 
+                    RowBox[{"2", "^", 
+                    RowBox[{"(", 
+                    RowBox[{"#", "+", "1"}], ")"}]}]}], ";", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"horizontalscroll", ">", 
+                    RowBox[{
+                    RowBox[{"4", "MeasureSize"}], "-", "16"}]}], ",", 
+                    RowBox[{"horizontalscroll", "=", 
+                    RowBox[{
+                    RowBox[{"4", "MeasureSize"}], "-", "16"}]}]}], "]"}], ";", 
+                    RowBox[{"totalptlist", "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{"totalptlist", "[", 
+                    RowBox[{"[", "a", "]"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"First", "[", "#", "]"}], "+", 
+                    RowBox[{"Last", "[", "#", "]"}], "-", "1"}], 
+                    "\[LessEqual]", 
+                    RowBox[{"4", "MeasureSize"}]}], ")"}], "&"}]}], "]"}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"a", ",", "1", ",", 
+                    RowBox[{"Length", "[", "totalptlist", "]"}]}], "}"}]}], 
+                    "]"}]}], ";", 
+                    RowBox[{"ptlis", "=", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{"ptlis", ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"First", "[", "#", "]"}], "\[LessEqual]", 
+                    RowBox[{"4", "MeasureSize"}]}], ")"}], "&"}]}], "]"}]}]}],
+                     ")"}], ",", 
+                    RowBox[{"Appearance", "\[Rule]", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"MeasureSize", "\[Equal]", 
+                    RowBox[{"2", "^", 
+                    RowBox[{"(", 
+                    RowBox[{"#", "+", "1"}], ")"}]}]}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<FramedPalette\>\"", ",", "\"\<Pressed\>\""}],
+                     "}"}], ",", 
+                    RowBox[{"{", "\"\<FramedPalette\>\"", "}"}]}], "]"}]}]}], 
+                    "]"}], "&"}], ",", 
+                    RowBox[{"Range", "[", "5", "]"}]}], "]"}], "]"}]}], "}"}],
+                   "}"}], ",", 
+                 RowBox[{"ItemSize", "\[Rule]", 
+                  RowBox[{"{", 
+                   RowBox[{"{", 
+                    RowBox[{"10", ",", "50", ",", "10"}], "}"}], "}"}]}], ",", 
+                 RowBox[{"Alignment", "\[Rule]", "Left"}]}], "]"}], "]"}], 
+              ",", "\[IndentingNewLine]", 
+              RowBox[{"Row", "[", 
+               RowBox[{
+               "{", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
+                  RowBox[{"Column", "[", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"If", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"i", "==", "0"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{"menu", ",", 
+                    RowBox[{"Range", "[", "8", "]"}]}], "]"}], ",", 
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{"Framed", "[", 
+                    RowBox[{
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"Translate", "[", 
+                    RowBox[{
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"x", "+", "1"}], ">=", 
+                    RowBox[{
+                    RowBox[{"7", 
+                    RowBox[{"verticalscroll", "/", "12"}]}], "+", "8"}]}], "&&", 
+                    RowBox[{"x", "<=", 
+                    RowBox[{
+                    RowBox[{"7", 
+                    RowBox[{"verticalscroll", "/", "12"}]}], "+", "8", "+", 
+                    RowBox[{"14", "/", "3"}]}]}]}], ")"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"EdgeForm", "[", "Black", "]"}], ",", "White", 
+                    ",", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "x"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1.6", ",", 
+                    RowBox[{"x", "+", "1"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"{", "}"}]}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "1", ",", "15", ",", "1"}], "}"}]}], 
+                    "]"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "+", ".3"}], ">=", 
+                    RowBox[{
+                    RowBox[{"7", 
+                    RowBox[{"verticalscroll", "/", "12"}]}], "+", "8"}]}], "&&", 
+                    RowBox[{
+                    RowBox[{"#", "-", ".3"}], "<=", 
+                    RowBox[{
+                    RowBox[{"7", 
+                    RowBox[{"verticalscroll", "/", "12"}]}], "+", "8", "+", 
+                    RowBox[{"14", "/", "3"}]}]}]}], ")"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"Black", ",", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", 
+                    RowBox[{"#", "-", ".3"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"#", "+", ".3"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"{", "}"}]}], "]"}], "&"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "2", ",", "3", ",", "5", ",", "6", ",", "7", ",", "9", 
+                    ",", "10", ",", "12", ",", "13", ",", "14"}], "}"}]}], 
+                    "]"}], "\[IndentingNewLine]", ",", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"EdgeForm", "[", "Black", "]"}], ",", "White", 
+                    ",", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"5", ",", "x"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"5", "+", 
+                    RowBox[{"7", "/", "12"}]}], ",", 
+                    RowBox[{"x", "+", 
+                    RowBox[{"7", "/", "12"}]}]}], "}"}]}], "]"}]}], "}"}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "1", ",", "14.99", ",", 
+                    RowBox[{"7", "/", "12"}]}], "}"}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "\[IndentingNewLine]", "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", 
+                    RowBox[{
+                    RowBox[{"-", "7"}], 
+                    RowBox[{"verticalscroll", "/", "12"}]}]}], "}"}]}], "]"}],
+                     "}"}], ",", 
+                    RowBox[{"PlotRange", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "1.6"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"8", ",", 
+                    RowBox[{"8", "+", 
+                    RowBox[{"14", "/", "3"}]}]}], "}"}]}], "}"}]}], ",", 
+                    RowBox[{"ImagePadding", "\[Rule]", "0"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"120", ",", "350"}], "}"}]}]}], "]"}], ",", 
+                    RowBox[{"FrameMargins", "\[Rule]", "None"}]}], "]"}], 
+                    "}"}]}], "]"}], "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", ",", "Center", ",", ".3", ",", 
+                    RowBox[{"ItemSize", "\[Rule]", "10"}]}], "]"}], "]"}], 
+                 ",", "\[IndentingNewLine]", 
+                 RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
+                  RowBox[{"EventHandler", "[", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"Framed", "[", 
+                    RowBox[{
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"{", "\[IndentingNewLine]", 
+                    RowBox[{"White", ",", "\[IndentingNewLine]", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "+", 
+                    RowBox[{".2", "x"}], "-", ".17"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"17", ",", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "+", 
+                    RowBox[{".2", "x"}], "-", ".03"}]}], "}"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Hue", "[", 
+                    RowBox[{
+                    RowBox[{".2", "x"}], "-", ".2"}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "+", ".2"}], ",", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "+", 
+                    RowBox[{".2", "x"}], "-", ".2"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "+", 
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "3", "]"}], "]"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "+", 
+                    RowBox[{".2", "x"}]}]}], "}"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", "Black", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "+", 
+                    RowBox[{".2", "x"}], "-", ".2"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "+", ".2"}], ",", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "+", 
+                    RowBox[{".2", "x"}]}]}], "}"}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "}"}], "&"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"SortBy", "[", 
+                    RowBox[{
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "-", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "horizontalscroll", ",", "verticalscroll", ",", "0"}], 
+                    "}"}]}], "&"}], ",", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"i", "\[Equal]", "x"}], ",", 
+                    RowBox[{"Join", "[", 
+                    RowBox[{
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{"totalptlist", "[", 
+                    RowBox[{"[", "x", "]"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"First", "[", "#", "]"}], "<=", 
+                    RowBox[{"horizontalscroll", "+", "16"}]}], ")"}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"First", "[", "#", "]"}], "+", 
+                    RowBox[{"Last", "[", "#", "]"}]}], ">=", 
+                    "horizontalscroll"}], ")"}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "\[GreaterEqual]", 
+                    "verticalscroll"}], ")"}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "<=", 
+                    RowBox[{"verticalscroll", "+", "8"}]}], ")"}]}], ")"}], 
+                    "&"}]}], "]"}], 
+                    RowBox[{"(*", 
+                    RowBox[{"totalptlist", "[", 
+                    RowBox[{"[", "x", "]"}], "]"}], "*)"}], ",", 
+                    "currentbeat"}], "]"}], ",", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{"totalptlist", "[", 
+                    RowBox[{"[", "x", "]"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"First", "[", "#", "]"}], "<=", 
+                    RowBox[{"horizontalscroll", "+", "16"}]}], ")"}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"First", "[", "#", "]"}], "+", 
+                    RowBox[{"Last", "[", "#", "]"}]}], ">=", 
+                    "horizontalscroll"}], ")"}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "\[GreaterEqual]", 
+                    "verticalscroll"}], ")"}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "<=", 
+                    RowBox[{"verticalscroll", "+", "8"}]}], ")"}]}], ")"}], 
+                    "&"}]}], "]"}]}], "]"}]}], "]"}], ",", "First"}], "]"}]}],
+                     "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "1", ",", "5"}], "}"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{"symbol2", ",", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "-", 
+                    RowBox[{"{", 
+                    RowBox[{"horizontalscroll", ",", "0"}], "}"}]}], "&"}], 
+                    ",", "\[IndentingNewLine]", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{"ptlis", ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"First", "[", "#", "]"}], "<=", 
+                    RowBox[{"horizontalscroll", "+", "16"}]}], ")"}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"First", "[", "#", "]"}], ">=", 
+                    RowBox[{"horizontalscroll", "+", "1"}]}], ")"}]}], ")"}], 
+                    "&"}]}], "]"}]}], "]"}]}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"Line", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "x"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"17", ",", "x"}], "}"}]}], "}"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "1", ",", "9"}], "}"}]}], "]"}], ",", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", ".005", "]"}], ",", 
+                    RowBox[{"Line", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"1", "+", 
+                    RowBox[{"4", "x"}], "-", 
+                    RowBox[{"Mod", "[", 
+                    RowBox[{"horizontalscroll", ",", "4"}], "]"}]}], ",", 
+                    "1"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"1", "+", 
+                    RowBox[{"4", "x"}], "-", 
+                    RowBox[{"Mod", "[", 
+                    RowBox[{"horizontalscroll", ",", "4"}], "]"}]}], ",", 
+                    "9"}], "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "0", ",", "4", ",", ".999"}], "}"}]}], 
+                    "]"}], ",", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"Line", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "1"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "9"}], "}"}]}], "}"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", "1", ",", "17", ",", ".999"}], "}"}]}], 
+                    "]"}]}], "\[IndentingNewLine]", "}"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"ImageSize", "\[Rule]", "700"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"PlotRange", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "17"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "9"}], "}"}]}], "}"}]}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Background", "\[Rule]", "White"}]}], "]"}], ",", 
+                    RowBox[{"FrameMargins", "\[Rule]", "None"}]}], "]"}], ",",
+                     "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"i", "\[NotEqual]", "0"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"\"\<MouseDown\>\"", ":>", "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"MemberQ", "[", 
+                    RowBox[{
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Drop", "[", 
+                    RowBox[{"#", ",", 
+                    RowBox[{"{", "3", "}"}]}], "]"}], "&"}], ",", 
+                    RowBox[{"totalptlist", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"MousePosition", "[", "\"\<Graphics\>\"", "]"}], 
+                    "]"}], "+", 
+                    RowBox[{"{", 
+                    RowBox[{"horizontalscroll", ",", "verticalscroll"}], 
+                    "}"}]}]}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"totalptlist", "=", 
+                    RowBox[{"ReplacePart", "[", 
+                    RowBox[{"totalptlist", ",", 
+                    RowBox[{"i", "->", 
+                    RowBox[{"Delete", "[", 
+                    RowBox[{
+                    RowBox[{"totalptlist", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ",", 
+                    RowBox[{"Position", "[", 
+                    RowBox[{
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Drop", "[", 
+                    RowBox[{"#", ",", 
+                    RowBox[{"{", "3", "}"}]}], "]"}], "&"}], ",", 
+                    RowBox[{"totalptlist", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"MousePosition", "[", "\"\<Graphics\>\"", "]"}], 
+                    "]"}], "+", 
+                    RowBox[{"{", 
+                    RowBox[{"horizontalscroll", ",", "verticalscroll"}], 
+                    "}"}]}]}], "]"}]}], "]"}]}]}], "]"}]}], "}"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"currentbeat", "=", 
+                    RowBox[{"{", 
+                    RowBox[{"Append", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"MousePosition", "[", "\"\<Graphics\>\"", "]"}], 
+                    "]"}], "+", 
+                    RowBox[{"{", 
+                    RowBox[{"horizontalscroll", ",", "verticalscroll"}], 
+                    "}"}]}], ",", "1"}], "]"}], "}"}]}], ";", 
+                    RowBox[{"beatstart", "=", 
+                    RowBox[{
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"MousePosition", "[", "\"\<Graphics\>\"", "]"}], 
+                    "]"}], "+", 
+                    RowBox[{"{", 
+                    RowBox[{"horizontalscroll", ",", "verticalscroll"}], 
+                    "}"}]}]}]}], "}"}]}], "]"}], ")"}]}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"\"\<MouseDragged\>\"", "\[RuleDelayed]", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"beatstart", "\[NotEqual]", 
+                    RowBox[{"{", "}"}]}], ",", 
+                    RowBox[{"(", 
+                    RowBox[{"currentbeat", "=", "\[IndentingNewLine]", 
+                    RowBox[{"{", 
+                    RowBox[{"Append", "[", "\[IndentingNewLine]", 
+                    RowBox[{"beatstart", ",", "\[IndentingNewLine]", 
+                    RowBox[{"Which", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"MousePosition", "[", "\"\<Graphics\>\"", "]"}], 
+                    "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "-", 
+                    RowBox[{"beatstart", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "+", "horizontalscroll"}],
+                     "<", "0"}], ",", "\[IndentingNewLine]", "1", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"MousePosition", "[", "\"\<Graphics\>\"", "]"}], 
+                    "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ">", "16"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"17", "-", 
+                    RowBox[{"beatstart", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "+", "horizontalscroll"}],
+                     ",", "\[IndentingNewLine]", "True", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Round", "[", 
+                    RowBox[{
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"MousePosition", "[", "\"\<Graphics\>\"", "]"}], 
+                    "]"}], "-", "beatstart"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "+", "1", "+", 
+                    "horizontalscroll"}]}], "\[IndentingNewLine]", "]"}]}], 
+                    "]"}], "}"}]}], ")"}]}], "]"}]}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    "\"\<MouseUp\>\"", "\[RuleDelayed]", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"currentbeat", "\[NotEqual]", 
+                    RowBox[{"{", "}"}]}], ",", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"EmitSound", "[", 
+                    RowBox[{"Sound", "[", 
+                    RowBox[{"SoundNote", "[", 
+                    RowBox[{
+                    RowBox[{"currentbeat", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "2"}], "]"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", "0", ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM", "/", "60"}], ")"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"currentbeat", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "3"}], "]"}], "]"}], ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM", "/", "60"}], ")"}]}]}], "}"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Switch", "[", 
+                    RowBox[{
+                    "i", ",", "\[IndentingNewLine]", "1", ",", "melodya", ",",
+                     "\[IndentingNewLine]", "2", ",", "melodyb", ",", 
+                    "\[IndentingNewLine]", "3", ",", "melodyc", ",", 
+                    "\[IndentingNewLine]", "4", ",", "melodyd", ",", 
+                    "\[IndentingNewLine]", "5", ",", "melodye"}], "]"}], 
+                    "\[IndentingNewLine]", ",", 
+                    RowBox[{"SoundVolume", "\[Rule]", ".5"}]}], "]"}], "]"}], 
+                    "]"}], ";", 
+                    RowBox[{"totalptlist", "=", 
+                    RowBox[{"ReplacePart", "[", 
+                    RowBox[{"totalptlist", ",", 
+                    RowBox[{"i", "->", 
+                    RowBox[{"Join", "[", 
+                    RowBox[{
+                    RowBox[{"totalptlist", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ",", "currentbeat"}], 
+                    "]"}]}]}], "]"}]}], ";", 
+                    RowBox[{"currentbeat", "=", 
+                    RowBox[{"{", "}"}]}], ";", 
+                    RowBox[{"beatstart", "=", 
+                    RowBox[{"{", "}"}]}]}], ")"}]}], "]"}]}]}], 
+                    "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<MouseDown\>\"", ":>", 
+                    RowBox[{"(", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"MemberQ", "[", 
+                    RowBox[{"ptlis", ",", 
+                    RowBox[{
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"MousePosition", "[", "\"\<Graphics\>\"", "]"}], 
+                    "]"}], "+", 
+                    RowBox[{"{", 
+                    RowBox[{"horizontalscroll", ",", "0"}], "}"}]}]}], "]"}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"ptlis", "=", 
+                    RowBox[{"Delete", "[", 
+                    RowBox[{"ptlis", ",", 
+                    RowBox[{"Position", "[", 
+                    RowBox[{"ptlis", ",", 
+                    RowBox[{
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"MousePosition", "[", "\"\<Graphics\>\"", "]"}], 
+                    "]"}], "+", 
+                    RowBox[{"{", 
+                    RowBox[{"horizontalscroll", ",", "0"}], "}"}]}]}], 
+                    "]"}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"ptlis", "=", 
+                    RowBox[{"Append", "[", 
+                    RowBox[{"ptlis", ",", 
+                    RowBox[{
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"MousePosition", "[", "\"\<Graphics\>\"", "]"}], 
+                    "]"}], "+", 
+                    RowBox[{"{", 
+                    RowBox[{"horizontalscroll", ",", "0"}], "}"}]}]}], 
+                    "]"}]}], ";", 
+                    RowBox[{"EmitSound", "[", 
+                    RowBox[{"Sound", "[", 
+                    RowBox[{"SoundNote", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"PercussionList", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"9", "-", 
+                    RowBox[{
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"MousePosition", "[", "\"\<Graphics\>\"", "]"}], 
+                    "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "]"}], 
+                    "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", "0", ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM", "/", "60"}], ")"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"(", "0", ")"}], "/", 
+                    RowBox[{"(", 
+                    RowBox[{"BPM", "/", "60"}], ")"}]}]}], "}"}], ",", 
+                    "\"\<Percussion\>\""}], "]"}], "]"}], "]"}]}], ")"}]}], 
+                    "]"}], ")"}]}], "}"}]}], "]"}]}], "]"}], "]"}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"VerticalSlider", "[", 
+                  RowBox[{
+                   RowBox[{"Dynamic", "[", "verticalscroll", "]"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "12"}], ",", "5", ",", "1"}], "}"}], ",", 
+                   RowBox[{"ImageSize", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"20", ",", "348"}], "}"}]}]}], "]"}]}], 
+                "\[IndentingNewLine]", "\[IndentingNewLine]", "}"}], "]"}]}], 
+             "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"Background", "\[Rule]", 
+             RowBox[{"RGBColor", "[", 
+              RowBox[{".9", ",", ".9", ",", ".9"}], "]"}]}]}], 
+           "\[IndentingNewLine]", "]"}], "}"}], ",", 
+         RowBox[{"Selectable", "\[Rule]", "False"}], ",", 
+         RowBox[{"Editable", "\[Rule]", "False"}]}], "]"}], ",", 
+       RowBox[{"FrameMargins", "\[Rule]", "None"}]}], "]"}]}]}], 
+   "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.477149276665557*^9, 3.477149282017557*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Beat Machine", "Section",
+ CellChangeTimes->{{3.477149317368557*^9, 3.477149336276557*^9}}],
+
+Cell[BoxData[
+ RowBox[{"BeatMachine", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.4771493378645573`*^9, 3.4771493397115574`*^9}}]
+}, Open  ]],
+
+Cell[TextData[{
+ "Author Information\n",
+ StyleBox["Kevin Hsu, Oliver Chen, and Henry Huang\nMarch 2009",
+  FontSize->14,
+  FontWeight->"Plain"]
+}], "Section",
+ CellChangeTimes->{{3.4771495210255575`*^9, 3.477149525780557*^9}, {
+  3.477149561386557*^9, 3.477149632394557*^9}}]
+}, Open  ]]
+},
+AutoGeneratedPackage->None,
+WindowSize->{1008, 647},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (November 10, 2008)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 99, 1, 83, "Title"],
+Cell[CellGroupData[{
+Cell[691, 27, 99, 1, 71, "Section"],
+Cell[793, 30, 98733, 2100, 6312, "Input",
+ InitializationCell->True]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[99563, 2135, 97, 1, 41, "Section"],
+Cell[99663, 2138, 129, 2, 31, "Input"]
+}, Open  ]],
+Cell[99807, 2143, 276, 7, 107, "Section"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
